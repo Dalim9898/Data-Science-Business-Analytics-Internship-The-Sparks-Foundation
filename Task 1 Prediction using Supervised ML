@@ -1,0 +1,81 @@
+# THE SPARKS FOUNDATION
+
+# Data Science & Business Analytics Internship GRIP Feb 2021
+
+# Author : Udita Goswami
+
+# TASK 1 : Prediction using Supervised ML 
+
+Query - Predict the percentage of a student based on the no. of study hours.
+
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt;
+import seaborn as sns
+from sklearn.model_selection import train_test_split
+from sklearn.linear_model import LinearRegression
+
+df2="https://raw.githubusercontent.com/AdiPersonalWorks/Random/master/student_scores%20-%20student_scores.csv"
+
+df3=pd.read_csv(df2)
+df3
+
+df3.head()
+
+df3.info()
+
+df3.describe()
+
+df3.isnull().sum()
+
+plt.scatter(df3['Hours'],df3['Scores'])
+plt.xlabel('Hours')
+plt.ylabel('Scores')
+plt.title('Hours vs Score')
+
+x=df3.iloc[:,:-1].values
+y=df3.iloc[:,1].values
+
+x_train, x_test, y_train,y_test=train_test_split(x,y,test_size=0.3,random_state=0)
+
+regr=LinearRegression()
+regr
+
+regr.fit(x_train,y_train)
+
+l=regr.coef_*x+regr.intercept_
+l
+
+plt.scatter(x,y)
+
+plt.plot(x,l)
+plt.show()
+
+plt.scatter(x,y)
+plt.plot(x,l)
+plt.show()
+
+regr.intercept_
+
+print(regr.coef_)
+
+y_predct=regr.predict(x_test)
+y_predct
+
+pd.DataFrame({'Actual':y_test,'Predicted':y_predct})
+
+plt.scatter(x_test,y_test)
+plt.xlabel('X values')
+plt.ylabel('Y values')
+plt.title('Actual values')
+
+plt.scatter(x_test,y_predct)
+plt.xlabel('X values')
+plt.ylabel('Y values')
+plt.title('Predicted values')
+
+print(regr.predict([[9.25]]))
+
+Result : The predicted percentage of a student if he/she studies 9.25 hrs/day is 92.91505723.
+
+# ------------------------------------------------THANK YOU-------------------------------------------
